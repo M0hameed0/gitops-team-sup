@@ -1,8 +1,7 @@
-# application.yaml 
-apiVersion: argoproj.io/v1alpha1 
+piVersion: argoproj.io/v1alpha1 
 kind: Application 
 metadata: 
-  name: todo-api-dev 
+  name: todo-api-staging 
   namespace: argocd 
 spec:
   project: default
@@ -10,12 +9,12 @@ spec:
     repoURL: 'https://github.com/groupesup4/gitops-team-sup.git'
     targetRevision: gitops-mohamed    # <-- C'est ici que la magie opère !
     path: apps/todo-api/overlays/dev
-  destination: 
+  destination:
     server: https://kubernetes.default.svc 
-    namespace: todo-api-dev
+    namespace: todo-api-staging 
   syncPolicy: 
     automated: 
       prune: true 
       selfHeal: true 
     syncOptions: 
-      - CreateNamespace=true
+      - CreateNamespace=true 
