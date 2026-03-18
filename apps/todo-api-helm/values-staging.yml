@@ -1,0 +1,6 @@
+replicaCount: 2 
+service:           # <-- AJOUTE CECI
+  type: ClusterIP 
+env: 
+  NODE_ENV: staging 
+  PORT: "3000"
