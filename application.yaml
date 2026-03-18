@@ -2,20 +2,21 @@
 apiVersion: argoproj.io/v1alpha1 
 kind: Application 
 metadata: 
-  name: todo-api 
+  name: todo-api-dev 
   namespace: argocd 
 spec: 
   project: default 
-  source: 
-    repoURL: https://github.com/M0hameed0/gitops-team-sup
-    targetRevision: HEAD 
-    path: apps/todo-api 
+spec:
+  source:
+    repoURL: 'https://github.com/groupesup4/gitops-team-sup.git'
+    targetRevision: gitops-mohamed    # <-- C'est ici que la magie opère !
+    path: apps/todo-api/overlays/dev
   destination: 
     server: https://kubernetes.default.svc 
-    namespace: todo-api 
+    namespace: todo-api-dev
   syncPolicy: 
     automated: 
       prune: true 
       selfHeal: true 
     syncOptions: 
-      - CreateNamespace=true 
+      - CreateNamespace=true
