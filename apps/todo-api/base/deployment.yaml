@@ -2,11 +2,10 @@ apiVersion: apps/v1
 kind: Deployment 
 metadata: 
   name: todo-api 
-  namespace: todo-api 
   labels: 
     app: todo-api 
 spec: 
-  replicas: 3
+  replicas: 1 
   selector: 
     matchLabels: 
       app: todo-api 
@@ -17,15 +16,19 @@ spec:
     spec: 
       containers: 
         - name: todo-api 
-          image: nginx:latest
-          # Ex: image: docker.io/monuser/todo-api:v1.0.0 
+          image: ghcr.io/groupesup4/todo-api-node:latest
           ports: 
-            - containerPort: 80
+            - containerPort: 3000 
               name: http 
+          env: 
+            - name: PORT 
+              value: "3000" 
+            - name: NODE_ENV 
+              value: "production" 
           resources: 
             requests: 
               cpu: "100m" 
               memory: "128Mi" 
             limits: 
               cpu: "500m" 
-              memory: "256Mi"
+              memory: "256Mi" 
